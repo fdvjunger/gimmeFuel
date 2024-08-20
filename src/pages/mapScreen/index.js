@@ -5,10 +5,11 @@ import MapView from 'react-native-maps';
 export default function MapScreen() {
   return (
     <View style={styles.container}>
-      <MapView />
+      <MapView style={styles.map} />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

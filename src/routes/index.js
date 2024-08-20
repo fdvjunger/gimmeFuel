@@ -11,24 +11,8 @@ const Stack = createNativeStackNavigator();
 
 export default function RouterStore() {
     return (
-        <AuthProvider>
             <Stack.Navigator>
             
-                <Stack.Screen
-                    name='welcome'
-                    component={Welcome}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name='SignIn'
-                    component={SignIn}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name='SignUp'
-                    component={SignUp}
-                    options={{ headerShown: false }}
-                />
                 <Stack.Screen
                     name='MapScreen'
                     component={MapScreen}
@@ -36,6 +20,5 @@ export default function RouterStore() {
                 />
                 
             </Stack.Navigator>
-        </AuthProvider>
     );
 }
