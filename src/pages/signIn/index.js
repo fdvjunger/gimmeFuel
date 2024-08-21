@@ -4,6 +4,8 @@ import * as Animatable from 'react-native-animatable';
 import * as Location from 'expo-location';
 import { useAuth } from '../../context/authcontext'; 
 
+import strings from '../../utils/strings';
+
 
 export default function SignIn({ navigation }) {
     const [email, setEmail] = useState('');
@@ -24,7 +26,7 @@ export default function SignIn({ navigation }) {
     const handleLogin = async () => {
         console.log('Botão Acessar foi clicado');
         try {
-            const response = await fetch('http://localhost:3000/auth/login', {
+            const response = await fetch('http://'+strings.ip+':3000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,27 +37,26 @@ export default function SignIn({ navigation }) {
             const data = await response.json();
 
             if (response.status === 200) {
-                // Login bem-sucedido
                 Alert.alert('Login bem-sucedido', `Bem-vindo ${data.token}`);
                 
                 // Armazenar o token no contexto
                 setToken(data.token);
 
-                // Obter localização e buscar postos próximos
                 const location = await getCurrentLocation();
                 if (location) {
-                    const postosResponse = await fetch(`http://localhost:3000/api/postos/proximos?latitude=${location.latitude}&longitude=${location.longitude}&raio=5`, {
+                    console.log('entrou if')
+                    console.log(`http://${strings.ip}:3000/api/postos/proximos?latitude=${location.latitude}&longitude=${location.longitude}&raio=5`);
+                    const postosResponse = await fetch(`http://${strings.ip}:3000/api/postos/proximos?latitude=${location.latitude}&longitude=${location.longitude}&raio=5`, {
                         headers: {
-                            'Authorization': `Bearer ${data.token}` // Adicionar o token ao header
+                            'Authorization': `Bearer ${data.token}` 
                         }
                     });
+                    console.log('executou fetch')
                     const postosData = await postosResponse.json();
 
-                    // Navegar para a tela de mapa com os dados dos postos
                     navigation.navigate('MapScreen', { postos: postosData.postos });
                 }
             } else {
-                // Falha no login
                 Alert.alert('Erro de login', data.message || 'Ocorreu um erro durante o login');
             }
         } catch (error) {

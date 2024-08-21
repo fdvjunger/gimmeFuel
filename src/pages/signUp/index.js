@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
+import strings from '../../utils/strings';
+
 export default function SignUp({ navigation }) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -17,7 +19,7 @@ export default function SignUp({ navigation }) {
     const handleRegister = async () => {
         if (passwordMatch) {
             try {
-                const response = await fetch('http://localhost:3000/auth/register', {
+                const response = await fetch('http://'+strings.ip+':3000/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -32,7 +34,7 @@ export default function SignUp({ navigation }) {
                 const data = await response.json();
                 if (response.status === 201) {
                     Alert.alert('Sucesso', 'Usuário registrado com sucesso');
-                    navigation.navigate('SignIn'); // Navega para a tela de login
+                    navigation.navigate('SignIn'); 
                 } else {
                     Alert.alert('Erro', data.error || 'Ocorreu um erro ao registrar');
                 }

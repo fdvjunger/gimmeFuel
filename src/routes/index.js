@@ -5,6 +5,7 @@ import Welcome from '../pages/welcome';
 import SignIn from '../pages/signIn';
 import SignUp from '../pages/signUp';
 import MapScreen from '../pages/mapScreen';
+import AddPostoScreen from '../pages/cadastroPosto';
 import { AuthProvider } from '../context/authcontext'; // Importação corrigida
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,10 @@ export default function RouterStore() {
                     name='MapScreen'
                     component={MapScreen}
                     options={{ headerShown: false }}
+                />
+                <Stack.Screen 
+                    name="AddPosto" 
+                    component={AddPostoScreen} 
                 />
                 
             </Stack.Navigator>
