@@ -10,7 +10,7 @@ import strings from '../../utils/strings';
 export default function SignIn({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { setToken } = useAuth(); // Usar o contexto para definir o token
+    const { setToken } = useAuth(); 
 
     async function getCurrentLocation() {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -26,7 +26,7 @@ export default function SignIn({ navigation }) {
     const handleLogin = async () => {
         console.log('Botão Acessar foi clicado');
         try {
-            const response = await fetch('http://'+strings.ip+':3000/auth/login', {
+            const response = await fetch(strings.ip+'/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,14 +39,12 @@ export default function SignIn({ navigation }) {
             if (response.status === 200) {
                 Alert.alert('Login bem-sucedido', `Bem-vindo ${data.token}`);
                 
-                // Armazenar o token no contexto
+               
                 setToken(data.token);
 
                 const location = await getCurrentLocation();
                 if (location) {
-                    console.log('entrou if')
-                    console.log(`http://${strings.ip}:3000/api/postos/proximos?latitude=${location.latitude}&longitude=${location.longitude}&raio=5`);
-                    const postosResponse = await fetch(`http://${strings.ip}:3000/api/postos/proximos?latitude=${location.latitude}&longitude=${location.longitude}&raio=5`, {
+                   const postosResponse = await fetch(`${strings.ip}/api/postos/proximos?latitude=${location.latitude}&longitude=${location.longitude}&raio=5&combustivel=gasolina&top=5&page=1&limit=10`, {
                         headers: {
                             'Authorization': `Bearer ${data.token}` 
                         }

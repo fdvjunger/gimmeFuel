@@ -18,7 +18,7 @@ export default function Welcome(){
         <View style={styles.container}>
             <View style={styles.containerLogo}>
                 <Animatable.Image
-                    animation='flipInY'
+                    animation='bounce'
                     source={require('../../assets/logo.png')}
                     style = {{width: "100%"}}
                     resizeMode='contain'
@@ -26,8 +26,8 @@ export default function Welcome(){
             </View>
 
             <Animatable.View delay={600} animation='fadeInUp' style={styles.containerForm}>
-                <Text style={styles.title}>Gimme fuel description</Text>
-                <Text style={styles.text}>Faça login para começar</Text>
+                <Text style={styles.title}>Bem-vindo ao GimmeFuel!</Text>
+                <Text style={styles.text}>Encontre os postos de combustível mais próximos e com os melhores preços. Personalize sua busca, escolha o combustível, e nós faremos o resto para você economizar na hora de abastecer.</Text>
 
                 <TouchableOpacity 
                     onPress={()=>navigation.navigate('SignIn')}
@@ -63,7 +63,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 12,
-        marginBottom: 12
+        marginBottom: 12,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     text:{
         color: '#a1a1a1'

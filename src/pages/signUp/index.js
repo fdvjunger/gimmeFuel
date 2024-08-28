@@ -19,7 +19,7 @@ export default function SignUp({ navigation }) {
     const handleRegister = async () => {
         if (passwordMatch) {
             try {
-                const response = await fetch('http://'+strings.ip+':3000/auth/register', {
+                const response = await fetch(strings.ip+'/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

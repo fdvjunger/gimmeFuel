@@ -1,8 +1,6 @@
 
-
 const strings = {
-    ip: '192.168.1.7',
-    bearear: ''
+    ip: 'https://gimmefuel.onrender.com'
   };
   
   export default strings;
